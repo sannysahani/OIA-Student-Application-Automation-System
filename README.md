@@ -101,7 +101,43 @@ A simple front-end web page allows applicants to enter their Application ID and 
 | `docs/project_summary.md` | Short project explanation for non-technical reviewers |
 
 
+## screenshots/
 
+### 1. Google Form
+
+![Google Form](screenshots/01_google_form.png)
+
+### 2. Form Submission Saved in Google Sheets
+
+![Form Submission Saved in Sheet](screenshots/02_form_submission_saved_in_sheet.png)
+
+### 3. Application ID and PDF Generated
+
+![Application ID and PDF Generated](screenshots/03_application_id_and_pdf_generated.png)
+
+### 4. Confirmation Email
+
+![Confirmation Email](screenshots/04_confirmation_email.png)
+
+### 5. Reviewer Status Update in Google Sheets
+
+![Reviewer Status Update](screenshots/05_reviewer_status_update_in_sheet.png)
+
+### 6. Status Update Email
+
+![Status Update Email](screenshots/06_status_update_email.png)
+
+### 7. Updated PDF Summary
+
+![Updated PDF Summary](screenshots/07_updated_pdf_summary.png)
+
+### 8. Web App Status Checker
+
+![Status Checker Web App](screenshots/08_status_checker_web_app.png)
+
+### 9. Apps Script Code
+
+![Apps Script Code](screenshots/09_apps_script_code.png)
 ## Skills Demonstrated
 
 This project demonstrates practical experience with:
