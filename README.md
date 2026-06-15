@@ -62,7 +62,6 @@ Example statuses:
 * Under Review
 * Accepted
 * Rejected
-* Manual text
 
 ### Web-Based Status Checker
 
@@ -95,8 +94,7 @@ A simple front-end web page allows applicants to enter their Application ID and 
 | File                      | Description                                           |
 | ------------------------- | ----------------------------------------------------- |
 | `Code.gs`                 | Main Google Apps Script backend code                  |
-| `Index.html`              | Front-end web app for checking application status     |
-| `appsscript.json`         | Apps Script project configuration, if available       |
+| `Index.html`              | Front-end web app for checking application status     |  
 | `screenshots/`            | Demo screenshots showing the working workflow         |
 | `docs/project_summary.md` | Short project explanation for non-technical reviewers |
 
