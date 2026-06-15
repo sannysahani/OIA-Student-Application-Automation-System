@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f7f9fc;
+        color: #202124;
+      }
+
+      .card {
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      h1 {
+        margin-top: 0;
+        color: #1a365d;
+        font-size: 28px;
+      }
+
+      p {
+        line-height: 1.6;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        margin-bottom: 16px;
+        border: 1px solid #dadce0;
+        border-radius: 6px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 12px 20px;
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: #1558b0;
+      }
+
+      .result {
+        margin-top: 24px;
+        padding: 18px;
+        background: #eef4ff;
+        border-left: 4px solid #1a73e8;
+        border-radius: 6px;
+      }
+
+      .error {
+        margin-top: 24px;
+        padding: 18px;
+        background: #fff0f0;
+        border-left: 4px solid #d93025;
+        border-radius: 6px;
+      }
+
+      .status {
+        font-size: 18px;
+        font-weight: bold;
+        color: #0b57d0;
+      }
+
+      .footer {
+        margin-top: 24px;
+        font-size: 13px;
+        color: #5f6368;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h1>Student Application Status Checker</h1>
+
+      <p>
+        Enter your Application ID to check the current review status of your
+        student assistant application.
+      </p>
+
+      <label for="applicationId">Application ID</label>
+      <input
+        type="text"
+        id="applicationId"
+        placeholder="Example: OIA-2026-0001"
+      >
+
+      <button onclick="checkStatus()">Check Status</button>
+
+      <div id="output"></div>
+
+      <div class="footer">
+        Demo web app built with Google Apps Script, Google Sheets, and HTML Service.
+      </div>
+    </div>
+
+    <script>
+      function checkStatus() {
+        const applicationId = document.getElementById("applicationId").value.trim();
+        const output = document.getElementById("output");
+
+        if (!applicationId) {
+          output.innerHTML = `
+            <div class="error">
+              Please enter an Application ID.
+            </div>
+          `;
+          return;
+        }
+
+        output.innerHTML = `
+          <div class="result">
+            Checking application status...
+          </div>
+        `;
+
+        google.script.run
+          .withSuccessHandler(function(response) {
+            if (!response.found) {
+              output.innerHTML = `
+                <div class="error">
+                  ${response.message}
+                </div>
+              `;
+              return;
+            }
+
+            output.innerHTML = `
+              <div class="result">
+                <h3>Status Found</h3>
+                <p><strong>Application ID:</strong> ${response.applicationId}</p>
+                <p><strong>Name:</strong> ${response.fullName}</p>
+                <p><strong>Department:</strong> ${response.department}</p>
+                <p><strong>Status:</strong> <span class="status">${response.status}</span></p>
+                <p><strong>Last Updated:</strong> ${response.lastUpdated}</p>
+              </div>
+            `;
+          })
+          .withFailureHandler(function(error) {
+            output.innerHTML = `
+              <div class="error">
+                Error: ${error.message}
+              </div>
+            `;
+          })
+          .lookupApplication(applicationId);
+      }
+
+      document
+        .getElementById("applicationId")
+        .addEventListener("keydown", function(event) {
+          if (event.key === "Enter") {
+            checkStatus();
+          }
+        });
+    </script>
+  </body>
+</html>
